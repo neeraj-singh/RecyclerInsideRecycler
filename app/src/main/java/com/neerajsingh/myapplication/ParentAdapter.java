@@ -28,7 +28,7 @@ public class ParentAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         RecyclerView recyclerView = (RecyclerView) LayoutInflater.from(parent.getContext()).inflate(R.layout.row_recycler,parent,false);
         ArrayList<String> data = new ArrayList<String>();
         for(int i=1;i<6;i++){
-            data.add("Flipkart"+i);
+            data.add("Player "+i);
         }
         RecyclerViewHolder viewHolder = new RecyclerViewHolder(recyclerView,data);
         return viewHolder;
@@ -37,17 +37,11 @@ public class ParentAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
         Log.e(TAG,"onBindViewHolder at position : "+position);
-        if(position%2==0) {
-            if(holder.layoutManager==null) {
-                holder.layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-                holder.layoutManager.onSaveInstanceState();
-            }
-        }else{
-            if(holder.layoutManager==null) {
-                holder.layoutManager = new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
-
-            }
+        if(holder.layoutManager==null) {
+            holder.layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+            holder.layoutManager.onSaveInstanceState();
         }
+
         holder.childRecyclerView.setLayoutManager(holder.layoutManager);
         holder.childRecyclerView.setNestedScrollingEnabled(true);
         holder.adapter = new ChildAdapter(context,holder.data);
